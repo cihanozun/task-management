@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button[type="submit"] {
+    color: #ffffff; /* text-white */
+    width: 8rem; /* w-32 */
+    background-color: #3b82f6; /* bg-blue-500 */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+  }
