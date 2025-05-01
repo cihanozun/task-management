@@ -38,7 +38,7 @@ export class LoginComponent {
           role: res.userRole
         }
         StorageService.saveUser(user);
-        StorageService.setToken(res.jwt);
+        StorageService.saveToken(res.jwt);
 
         if(StorageService.isAdminLoggedIn()){
           this.router.navigateByUrl('admin/dashboard');

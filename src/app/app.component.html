@@ -1,8 +1,23 @@
-<div>
+<div *ngIf="!isEmployeeLoggedIn && !isAdminLoggedIn">
   <mat-toolbar color="secondary" class="navbar">
-    <span class="navbar-brand">Angular Material</span>
-    <button mat-button routerLink="/signup" routerLinkActive="active" >Sign Up</button>
-    <button mat-button routerLink="/login" routerLinkActive="active" >Login</button>
+    <span class="navbar-brand flex-1">Angular Material</span>
+      <button mat-button routerLink="/signup" routerLinkActive="active" >Sign Up</button>
+      <button mat-button routerLink="/login" routerLinkActive="active" >Login</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="isAdminLoggedIn">
+  <mat-toolbar color="secondary" class="navbar">
+    <span class="navbar-brand flex-1">Admin</span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active" >Dashboard</button>
+    <button mat-button routerLink="/admin/task" routerLinkActive="active" >Post Task</button>
+    <button mat-button (click)="logOut()" routerLinkActive="active" >Log out</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="isEmployeeLoggedIn">
+  <mat-toolbar color="secondary" class="navbar">
+    <span class="navbar-brand flex-1">Employee</span>
+    <button mat-button routerLink="/employee/dashboard" routerLinkActive="active" >Dashboard</button>
+    <button mat-button (click)="logOut()"  routerLinkActive="active" >Log out</button>
   </mat-toolbar>
 </div>
 
