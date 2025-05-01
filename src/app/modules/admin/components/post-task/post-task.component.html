@@ -1,1 +1,65 @@
-<p>post-task works!</p>
+<div class="flex justify-center items-center min-h-screen bg-gray-300">
+    <div class="bg-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-xl">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Post a New Task</h2>
+  
+      <form [formGroup]="taskForm" (ngSubmit)="postTask()" class="space-y-6">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+          <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+            Title is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" rows="4" style="resize: none;"></textarea>
+          <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+            Description is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dueDate">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="taskForm.get('dueDate')?.hasError('required')">
+            Due date is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Select Priority</mat-label>
+          <mat-select formControlName="priority">
+            <mat-option *ngFor="let priority of listOfPriorities" [value]="priority">
+              {{ priority }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">
+            Priority is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Select Employee</mat-label>
+          <mat-select formControlName="employeeId">
+            <mat-option *ngFor="let employee of listOfEmployees" [value]="employee.id">
+              {{ employee.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="taskForm.get('employeeId')?.hasError('required')">
+            Employee is required
+          </mat-error>
+        </mat-form-field>
+  
+        <div class="flex justify-center">
+          <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
+            Post Task
+          </button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+  
