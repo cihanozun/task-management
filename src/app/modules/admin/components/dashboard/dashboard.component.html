@@ -38,7 +38,7 @@
     *ngFor="let task of listofTasks"
     class="bg-white rounded-2xl shadow p-4 border hover:shadow-lg transition relative flex flex-col justify-between"
   >
-    <!-- Üst kısım: Başlık ve öncelik -->
+
     <div>
         <div class="flex justify-between items-center mb-2">
         <h2 class="text-xl font-semibold text-gray-800">{{ task.title }}</h2>
@@ -69,7 +69,7 @@
                 'bg-blue-100 text-blue-800': task.taskStatus === 'INPROGRESS',
                 'bg-gray-200 text-gray-700': task.taskStatus === 'PENDING',
                 'bg-green-200 text-green-800': task.taskStatus === 'COMPLETED',
-                'bg-orange-300-200 text-orange-700-800': task.taskStatus === 'DEFERRED',
+                'bg-orange-300 text-orange-700': task.taskStatus === 'DEFERRED',
                 'bg-red-200 text-red-800': task.taskStatus === 'CANCELLED'
 
                 }"
@@ -90,11 +90,16 @@
             >
                 <mat-icon>delete_outline</mat-icon>
             </button>
+            <button
+            routerLink="/admin/task-details/{{ task.id }}" mat-icon-button
+            class="flex items-center gap-1 text-sm size-6  hover:text-green-400 transition hover:scale-125 duration-300"
+            >
+            <mat-icon>pageview</mat-icon>
+
+
+            </button>
     </div>
         </div>
     </div>
-
-    <!-- Alt sağ köşede silme butonu -->
-    
   </div>
 </div>

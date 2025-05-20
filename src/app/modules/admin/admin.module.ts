@@ -10,11 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateTaskComponent } from './components/update-task/update-task.component';
+import { ViewTaskDetailsComponent } from './components/view-task-details/view-task-details.component';
 
 
 @NgModule({
@@ -22,6 +21,7 @@ import { UpdateTaskComponent } from './components/update-task/update-task.compon
     DashboardComponent,
     PostTaskComponent,
     UpdateTaskComponent,
+    ViewTaskDetailsComponent,
   ],
   imports: [
     CommonModule,

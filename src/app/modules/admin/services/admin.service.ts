@@ -53,6 +53,22 @@ export class AdminService {
     })
   }
 
+  createComment(id: number, content: string):Observable<any> {
+    const params = {
+      content: content
+    }
+    return this.http.post(API_URL + "api/admin/task/comment/" + id, null, {
+      params: params,
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  getCommentsByTask(id: number):Observable<any> {
+    return this.http.get(API_URL + "api/admin/comments/" + id, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
   private createAuthorizationHeader(): any {
     return new HttpHeaders().set('Authorization', 'Bearer ' + StorageService.getToken());
   }
