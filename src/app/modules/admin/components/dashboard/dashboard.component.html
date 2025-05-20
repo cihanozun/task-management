@@ -1,1 +1,100 @@
-<p>dashboard works!</p>
+<form class="search-form" [formGroup]="searchForm">
+  <div class="search-container">
+    <input
+      id="searchInput"
+      class="search-input"
+      type="text"
+      placeholder="Search by title"
+      formControlName="title"
+    />
+
+    <button
+    *ngIf="isClearVisible"
+      type="button"
+      mat-icon-button
+      color="primary"
+      aria-label="Clear"
+      (click)="clearSearch()"
+
+    >
+      <mat-icon class="text-green-900 hover:text-green-400 transition hover:scale-125 duration-300">restore_from_trash</mat-icon>
+    </button>
+
+    <button
+      type="submit"
+      mat-icon-button
+      color="primary"
+      aria-label="Search"
+      (click)="searchTask()"
+    >
+      <mat-icon style="vertical-align: bottom;">search</mat-icon>
+    </button>
+  </div>
+</form>
+
+
+<div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div
+    *ngFor="let task of listofTasks"
+    class="bg-white rounded-2xl shadow p-4 border hover:shadow-lg transition relative flex flex-col justify-between"
+  >
+    <!-- Üst kısım: Başlık ve öncelik -->
+    <div>
+        <div class="flex justify-between items-center mb-2">
+        <h2 class="text-xl font-semibold text-gray-800">{{ task.title }}</h2>
+        <span
+          class="text-xs px-2 py-1 rounded-full font-semibold"
+          [ngClass]="{
+            'bg-yellow-100 text-yellow-700': task.priority === 'MEDIUM',
+            'bg-red-100 text-red-700': task.priority === 'HIGH',
+            'bg-green-100 text-green-700': task.priority === 'LOW'
+          }"
+        >
+          {{ task.priority }}
+        </span>
+      </div>
+
+        <p class="text-gray-600 text-sm mb-3">{{ task.description }}</p>
+        <p class="text-gray-500 text-xs mb-1">
+        <strong>Due:</strong> {{ task.dueDate | date: 'mediumDate' }}
+        </p>
+        <p class="text-gray-500 text-xs mb-1">
+            <strong>Assigned to:</strong> {{ task.employeeName }}
+        </p>
+        <div class="flex items-center justify-between">
+
+            <span
+            class="inline-block mt-3 text-xs px-2 py-1 rounded-full"
+            [ngClass]="{
+                'bg-blue-100 text-blue-800': task.taskStatus === 'INPROGRESS',
+                'bg-gray-200 text-gray-700': task.taskStatus === 'PENDING',
+                'bg-green-200 text-green-800': task.taskStatus === 'COMPLETED',
+                'bg-orange-300-200 text-orange-700-800': task.taskStatus === 'DEFERRED',
+                'bg-red-200 text-red-800': task.taskStatus === 'CANCELLED'
+
+                }"
+            >
+            {{ task.taskStatus }}
+            </span>
+            <div class="flex justify-end mt-4">
+            <button
+            [routerLink]="'/admin/task/' + task.id + '/edit'"
+            class="flex items-center gap-1 text-sm size-6  hover:text-green-400 transition hover:scale-125 duration-300"
+            >
+                <mat-icon>edit</mat-icon>
+
+            </button>
+            <button
+                (click)="deleteTask(task.id)"
+                class="flex items-center gap-1 text-sm  hover:text-red-400 transition hover:scale-125 duration-300"
+            >
+                <mat-icon>delete_outline</mat-icon>
+            </button>
+    </div>
+        </div>
+    </div>
+
+    <!-- Alt sağ köşede silme butonu -->
+    
+  </div>
+</div>

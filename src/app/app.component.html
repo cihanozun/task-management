@@ -6,20 +6,76 @@
   </mat-toolbar>
 </div>
 <div *ngIf="isAdminLoggedIn">
-  <mat-toolbar color="secondary" class="navbar">
-    <span class="navbar-brand flex-1">Admin</span>
-    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active" >Dashboard</button>
-    <button mat-button routerLink="/admin/task" routerLinkActive="active" >Post Task</button>
-    <button mat-button (click)="logOut()" routerLinkActive="active" >Log out</button>
+  <mat-toolbar color="secondary" class="navbar flex justify-between items-center shadow px-4 rounded-b-lg">
+
+    <!-- Admin Branding -->
+    <div class="flex items-center gap-2 text-blue-500 text-lg font-semibold">
+      <mat-icon>admin_panel_settings</mat-icon>
+      <span>Admin Side</span>
+    </div>
+
+    <!-- Nav Links -->
+    <div class="flex gap-4 items-center">
+      <button
+        mat-button
+        routerLink="/admin/dashboard"
+        routerLinkActive="active"
+        class="hover:bg-white/20 text-white rounded px-3 py-1"
+      >
+        Dashboard
+      </button>
+
+      <button
+        mat-button
+        routerLink="/admin/task"
+        routerLinkActive="active"
+        class="hover:bg-white/20 text-white rounded px-3 py-1"
+      >
+        New Task
+      </button>
+
+      <button
+        mat-button
+        (click)="logOut()"
+        class="hover:bg-red-600 bg-red-500 text-white rounded px-3 py-1 transition duration-150"
+      >
+        Log out
+      </button>
+    </div>
   </mat-toolbar>
 </div>
+
 <div *ngIf="isEmployeeLoggedIn">
-  <mat-toolbar color="secondary" class="navbar">
-    <span class="navbar-brand flex-1">Employee</span>
-    <button mat-button routerLink="/employee/dashboard" routerLinkActive="active" >Dashboard</button>
-    <button mat-button (click)="logOut()"  routerLinkActive="active" >Log out</button>
+  <mat-toolbar color="secondary" class="navbar flex justify-between items-center shadow px-4 rounded-b-lg">
+
+    <!-- Employee Branding -->
+    <div class="flex items-center gap-2 text-yellow-600 text-lg font-semibold">
+      <mat-icon>badge</mat-icon>
+      <span>Employee</span>
+    </div>
+
+    <!-- Nav Links -->
+    <div class="flex gap-4 items-center">
+      <button
+        mat-button
+        routerLink="/employee/dashboard"
+        routerLinkActive="active"
+        class="hover:bg-white/20 text-white rounded px-3 py-1"
+      >
+        Dashboard
+      </button>
+
+      <button
+        mat-button
+        (click)="logOut()"
+        class="hover:bg-red-600 bg-red-500 text-white rounded px-3 py-1 transition duration-150"
+      >
+        Log out
+      </button>
+    </div>
   </mat-toolbar>
 </div>
+
 
 
 <router-outlet></router-outlet>

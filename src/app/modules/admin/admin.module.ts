@@ -13,12 +13,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
+import { UpdateTaskComponent } from './components/update-task/update-task.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     PostTaskComponent,
+    UpdateTaskComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatOptionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

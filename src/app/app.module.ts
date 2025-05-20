@@ -38,6 +38,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,42 @@ export class AdminService {
     })
   }
 
+  postTask(taskDTO):Observable<any> {
+    return this.http.post(API_URL + "api/admin/task",taskDTO, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  getAllTasks():Observable<any> {
+    return this.http.get(API_URL + "api/admin/tasks", {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  deleteTask(id: number):Observable<any> {
+    return this.http.delete(API_URL + "api/admin/task/"+id, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  getTaskById(id: number):Observable<any> {
+    return this.http.get(API_URL + "api/admin/task/"+id, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  updateTask(id: number, taskDTO: any):Observable<any> {
+    return this.http.put(API_URL + `api/admin/task/${id}`,taskDTO, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  searchTask(title: number):Observable<any> {
+    return this.http.get(API_URL + `api/admin/tasks/search/${title}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
   private createAuthorizationHeader(): any {
     return new HttpHeaders().set('Authorization', 'Bearer ' + StorageService.getToken());
   }
