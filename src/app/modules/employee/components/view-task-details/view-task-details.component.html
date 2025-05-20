@@ -1,0 +1,104 @@
+<div class="min-h-screen bg-gray-100 text-gray-800 px-6 py-10" *ngIf="taskData">
+
+  <!-- Görev Başlık + Durum -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4">
+    <h1 class="text-3xl font-bold mb-2 sm:mb-0">{{ taskData.title }}</h1>
+    <span
+      class="text-sm font-medium px-3 py-1 rounded-full"
+      [ngClass]="{
+                'bg-blue-100 text-blue-800': taskData.taskStatus === 'INPROGRESS',
+                'bg-gray-200 text-gray-700': taskData.taskStatus === 'PENDING',
+                'bg-green-200 text-green-800': taskData.taskStatus === 'COMPLETED',
+                'bg-orange-300 text-orange-700': taskData.taskStatus === 'DEFERRED',
+                'bg-red-200 text-red-800': taskData.taskStatus === 'CANCELLED'
+      }"
+    >
+      {{ taskData.taskStatus }}
+    </span>
+  </div>
+
+  <!-- Görev Açıklaması -->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Description</h2>
+    <p class="text-gray-700 text-base leading-relaxed">
+      {{ taskData.description }}
+    </p>
+  </div>
+
+  <!-- Detaylar -->
+  <div class="grid sm:grid-cols-2 gap-6 mb-10 text-base">
+    <div>
+      <h3 class="font-medium text-gray-600">Due Date</h3>
+      <p class="text-gray-600 font-bold">{{ taskData.dueDate | date: 'fullDate' }}</p>
+    </div>
+
+    <div>
+      <h3 class="font-medium text-gray-600">Priority</h3>
+      <span
+        class="inline-block mt-1 text-sm px-2 py-1 rounded-full font-semibold"
+        [ngClass]="{
+          'bg-yellow-100 text-yellow-700': taskData.priority === 'MEDIUM',
+          'bg-red-100 text-red-700': taskData.priority === 'HIGH',
+          'bg-green-100 text-green-700': taskData.priority === 'LOW'
+        }"
+      >
+        {{ taskData.priority }}
+      </span>
+    </div>
+
+    <div>
+      <h3 class="font-medium text-gray-600">Assigned To</h3>
+      <p class="text-gray-600 font-bold">{{ taskData.employeeName }}</p>
+    </div>
+
+    <div>
+      <h3 class="font-medium text-gray-600">Employee ID</h3>
+      <p class="text-gray-600 font-bold">#{{ taskData.employeeId }}</p>
+    </div>
+  </div>
+
+
+<div class="mt-10 border-t pt-6">
+  <h3 class="text-xl font-semibold mb-4 text-gray-800">Comments</h3>
+
+  <!-- Yorum Listesi -->
+  <div *ngIf="comments?.length > 0; else noComments">
+    <div *ngFor="let comment of comments" class="mb-4 bg-white rounded-lg shadow p-4">
+      <div class="flex justify-between items-start mb-2">
+        <div>
+          <span class="font-medium text-gray-800 block">{{ comment.author }}</span>
+          <span class="text-xs text-gray-500 italic">{{ comment.postedBy }}</span>
+        </div>
+        <span class="text-xs text-gray-500">{{ comment.createdAt | date:'medium' }}</span>
+      </div>
+      <p class="text-gray-700">{{ comment.content }}</p>
+    </div>
+  </div>
+
+  <!-- Hiç yorum yoksa -->
+  <ng-template #noComments>
+    <p class="text-gray-500 italic">No comments yet.</p>
+  </ng-template>
+
+  <!-- Yorum Ekleme Formu -->
+  <mat-card class="mt-6">
+    <h4 class="text-lg font-semibold mb-4">Add a Comment</h4>
+    <form [formGroup]="commentForm" (ngSubmit)="publishComment()">
+      <mat-form-field class="w-full">
+        <mat-label>Your Comment</mat-label>
+        <textarea matInput rows="3" formControlName="content"></textarea>
+      </mat-form-field>
+      <div class="text-right">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!commentForm.valid">
+          Publish
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+
+
+</div>
+
+
